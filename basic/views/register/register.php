@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use dosamigos\datepicker\DatePicker;
+// use yii\datepicker\DatePicker;
 ?>
 
     <!-- 内容 -->
@@ -35,15 +37,30 @@ use yii\widgets\ActiveForm;
               <?= $form->field($model, 'user_name')->textInput(['class' => 'register-input' ,'placeholder' => '请输入中文名']) ?>
               <?= $form->field($model, 'user_tel')->textInput(['class' => 'register-input' ,'placeholder' => '请输入手机号码']) ?>
               <?= $form->field($model, 'user_email')->textInput(['class' => 'register-input' ,'placeholder' => '请输入邮箱']) ?>
-              <?= $form->field($model, 'user_birthday')->textInput(['class' => 'register-input' ,'placeholder' => '请输入出生年月']); ?>
+              <span class="lab">出生年月日</span>
+              <?= DatePicker::widget([
+                  'model' => $model,
+                  'attribute' => 'user_birthday',
+                  'template' => '{addon}{input}',
+                  'clientOptions' => [
+                          'autoclose' => true,
+                          'format' => 'yyyy-M-dd',
+                          'language' => 'diy',
+                          'placeholder' => '出生年月日',
+                      ],
+              ]);?>
+
               <?= $form->field($model, 'user_academy')->dropDownList($academy,[
                   'class' => 'form-control register-select'
               ]) ?>
               <?= $form->field($model, 'user_major')->textInput(['class' => 'register-input' ,'placeholder' => '请输入班级']); ?>
-              <?= $form->field($model, 'user_organization')->dropDownList($organization,[
-                  'class' => 'form-control register-select'
+              <?= $form->field($model, 'user_organization_id')->dropDownList($organization,[
+                  'class' => 'form-control register-select',
+                  'onchange' => '$.post("'.yii::$app->urlManager->createUrl('register/depopt').'&organizationId="+$(this).val(), function(data){
+                      $("select#user-user_department_id").html(data);
+                  })',
               ]) ?>
-              <?= $form->field($model, 'user_department')->dropDownList($department,[
+              <?= $form->field($model, 'user_department_id')->dropDownList($department,[
                   'class' => 'form-control register-select'
               ]) ?>
               <?= $form->field($model, 'user_introduction')->textarea(['class' => 'register-textarea', 'placeholder' => '请输入个人简介']) ?>

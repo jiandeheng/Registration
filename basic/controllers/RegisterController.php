@@ -4,10 +4,17 @@ namespace app\controllers;
 
 use yii\web\Controller;
 use app\models\User;
+use app\models\Department;
+use app\models\Organization;
+use app\models\Academy;
+use yii\helpers\Html;
+use yii\helpers\ArrayHelper;
 use Yii;
 
 class RegisterController extends Controller
 {
+
+    public $enableCsrfValidation = false;
 
 	public function actionRegister(){
 		$this->layout = 'layout1';
@@ -15,22 +22,30 @@ class RegisterController extends Controller
 		if (Yii::$app->request->isPost) {
             $post = Yii::$app->request->post();
             if ($model->register($post)) {
-                $url = Yii::$app->session->setFlash('info', '报名成功');
+                Yii::$app->session->setFlash('info', '报名成功');
+                return $this->redirect(['register/register']);
             }
         }
 
-        $academy = array(
-        	'信息工程学院' => '信息工程学院',
-        	'外国语学院' => '外国语学院' 
-        );
-        $organization = array(
-        	'校团委' => '校团委',
-        	'学生会' => '学生会'
-        );
-        $department = array(
-        	'网络中心' => '网络中心',
-        	'学术科技部' => '学术科技部'
-        );
+        $org = Organization::find()->asArray()->all();
+        $organization = ArrayHelper::map($org, 'organization_id', 'organization_name');
+        foreach ($organization as $key => $value) {
+            $depModel = new Department;
+            $department = $depModel->getDepartmentsList($key);
+            break;
+        }
+
+        $aca = Academy::find()->asArray()->all();
+        $academy = ArrayHelper::map($aca, 'academy_name', 'academy_name');
 		return $this->render('register' ,['model' => $model, 'academy' => $academy, 'organization' => $organization, 'department' => $department, 'url'=>$url]);
 	}
+
+    public function actionDepopt($organizationId){
+        $dep = new Department;
+        $depModel = $dep->getDepartmentsList($organizationId);
+        foreach ($depModel as $value => $name) {
+            echo Html::tag('option', Html::encode($name), array('value' => $value));
+        }
+    }
+
 }

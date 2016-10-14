@@ -15,8 +15,9 @@ $config = [
             'class' => 'yii\caching\FileCache',
         ],
         'user' => [
-            'identityClass' => 'app\models\User',
-            'enableAutoLogin' => true,
+            'identityClass' => 'app\models\Superadmin',
+            // 'enableAutoLogin' => true, //cookie维持登录
+            'enableSession' => true, //session维持登录
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',
