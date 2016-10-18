@@ -12,6 +12,14 @@ use app\models\User;
  */
 class UserSearch extends User
 {
+
+
+    public function attributes()
+    {
+        // 添加关联字段到可搜索属性集合
+        return array_merge(parent::attributes(), ['userDepartment.department_name']);
+    }
+
     /**
      * @inheritdoc
      */
@@ -19,7 +27,7 @@ class UserSearch extends User
     {
         return [
             [['user_id', 'user_organization_id', 'user_department_id', 'status'], 'integer'],
-            [['user_name', 'user_tel', 'user_email', 'user_birthday', 'user_academy', 'user_major', 'user_introduction', 'user_reason'], 'safe'],
+            [['user_name', 'user_tel', 'user_email', 'user_birthday', 'user_academy', 'user_major', 'user_introduction', 'user_reason', 'userDepartment.department_name'], 'safe'],
         ];
     }
 
@@ -47,6 +55,8 @@ class UserSearch extends User
             'query' => $query,
         ]);
 
+        $query->joinWith(['userDepartment' => function($query) { $query->from(['userDepartment' => 'department']); }]);
+
         $this->load($params);
 
         if (!$this->validate()) {
@@ -69,7 +79,8 @@ class UserSearch extends User
             ->andFilterWhere(['like', 'user_academy', $this->user_academy])
             ->andFilterWhere(['like', 'user_major', $this->user_major])
             ->andFilterWhere(['like', 'user_introduction', $this->user_introduction])
-            ->andFilterWhere(['like', 'user_reason', $this->user_reason]);
+            ->andFilterWhere(['like', 'user_reason', $this->user_reason])
+            ->andFilterWhere(['like', 'userDepartment.department_name', $this->getAttribute('userDepartment.department_name')]);
 
         return $dataProvider;
     }

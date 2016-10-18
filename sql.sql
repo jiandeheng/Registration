@@ -70,3 +70,14 @@ organization_id INT UNSIGNED NOT NULL,
 PRIMARY KEY(organization_user_id),
 FOREIGN KEY(organization_id) REFERENCES organization(organization_id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+DROP TABLE IF EXISTS department_user;
+CREATE TABLE department_user (
+department_user_id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+department_user_username VARCHAR(20) NOT NULL DEFAULT '',
+department_user_password VARCHAR(32) NOT NULL DEFAULT '',
+department_id INT UNSIGNED NOT NULL,
+PRIMARY KEY(department_user_id),
+FOREIGN KEY(department_id) REFERENCES department(department_id)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;

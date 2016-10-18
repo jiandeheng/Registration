@@ -237,7 +237,7 @@ Asset1::register($this);
                         <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                         </li>
                         <li class="divider"></li>
-                        <li><a href="#"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li><a href="<?php echo yii\helpers\Url::to(['superadmin-login/logout']) ?>"><i class="fa fa-sign-out fa-fw"></i> 退出登录</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->

@@ -1,0 +1,44 @@
+body{
+  background: url(../img/bg.jpg);
+  background-position: center;
+}
+.wrap{
+  width: 30%;
+  min-height: 350px;
+  background-color: #FFF;
+  margin: 100px auto;
+  opacity: 0.6;
+  box-shadow: 1px 1px 20px #FFF;
+}
+@media screen and (max-width:720px){
+  .wrap{
+    width: 80%;
+    height: 350px;
+    background-color: #FFF;
+    margin: 100px auto;
+    opacity: 0.6;
+    box-shadow: 1px 1px 20px #FFF;
+  }
+}
+.wrap>h3{
+  text-align: center;
+  padding: 20px;
+}
+.login-form{
+  width: 100%;
+  padding: 0px 20px;
+}
+.login-form >.login-input{
+  border: 0px;
+  border-bottom: 1px solid #ccc;
+  height: 50px;
+  width: 100%;
+  padding: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.login-form>.login-button{
+  margin-top: 20px;
+  width: 100%;
+  margin-bottom: 20px;
+}

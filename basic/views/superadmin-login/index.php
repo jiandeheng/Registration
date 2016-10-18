@@ -56,7 +56,7 @@ Asset1::register($this);
 
                       <?= $form->field($model, 'loginUsername')->textInput(['class' => 'superadmin-login-input', 'placeholder' => '请输入账号...']) ?>
                       <?= $form->field($model, 'loginPassword')->passwordInput(['class' => 'superadmin-login-input', 'placeholder' => '请输入密码...']) ?>
-                  
+                      <a href="<?php echo yii\helpers\Url::to(['admin-psd/superadmin']) ?>">修改密码</a>
                       <div class="form-group">
                           <?= Html::submitButton('登录', ['class' => 'btn btn-success superadmin-login-button']) ?>
                       </div>

@@ -101,4 +101,20 @@ class User extends \yii\db\ActiveRecord
         }
         return false;
     }
+
+    public function addUserInfoByOrg(){
+        $session = Yii::$app->session;
+        $organizationId = $session->get('organizationId');
+        $this->user_organization_id = $organizationId;
+        return self::save();
+    }
+
+    public function addUserInfoByDep(){
+        $session = Yii::$app->session;
+        $organizationId = $session->get('organizationId');
+        $departmentId = $session->get('departmentId');
+        $this->user_organization_id = $organizationId;
+        $this->user_department_id = $departmentId;
+        return self::save();
+    }
 }

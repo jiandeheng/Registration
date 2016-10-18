@@ -1,0 +1,65 @@
+<?php
+
+use yii\helpers\Html;
+
+
+/* @var $this yii\web\View */
+/* @var $model app\models\User */
+
+$this->title = '添加报名信息';
+$this->params['breadcrumbs'][] = ['label' => 'Users', 'url' => ['index']];
+$this->params['breadcrumbs'][] = $this->title;
+?>
+
+<nav class="navbar-default navbar-side" role="navigation">
+    <div class="sidebar-collapse">
+        <ul class="nav" id="main-menu">
+
+            <li>
+                <a href="<?php echo yii\helpers\Url::to(['depadmin/index']) ?>"><i class="fa fa-dashboard"></i> 控制面板</a>
+            </li>
+            <li>
+                <a href="<?php echo yii\helpers\Url::to(['depadmin-userinfo/index']) ?>" class="active-menu"><i class="fa fa-desktop"></i> 报名信息</a>
+            </li>
+
+        </ul>
+    </div>
+</nav>
+
+<!-- /. NAV SIDE  -->
+<div id="page-wrapper" >
+    <div id="page-inner">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="page-header">
+                    学院管理 <small>管理整个系统的学院</small>
+                </h1>
+            </div>
+        </div> 
+        <!-- /. ROW  -->
+
+
+        <div class="row">
+            <div class="col-md-12">
+
+                <!-- content -->
+                <div class="user-create">
+
+				    <h1><?= Html::encode($this->title) ?></h1><hr>
+
+				    <?= $this->render('_form', [
+				        'model' => $model,
+				        'academy' => $academy,
+				    ]) ?>
+
+				</div>
+
+            </div>                              
+
+            <footer><p>All right reserved. Template by: KenKen</p></footer>
+        </div>
+        <!-- /. PAGE INNER  -->
+    </div>
+    <!-- /. PAGE WRAPPER  -->
+
+

@@ -30,6 +30,7 @@ class Department extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['department_name'], 'required', 'message' => '部门名称不能为空'],
             [['organization_id'], 'required'],
             [['organization_id'], 'integer'],
             [['department_name'], 'string', 'max' => 20]
@@ -62,6 +63,12 @@ class Department extends \yii\db\ActiveRecord
     public function getDepartmentsList($organizationId){
         $model = Department::find()->where(['organization_id' => $organizationId])->asArray()->all();
         return ArrayHelper::map($model, 'department_id', 'department_name');
+    }
+
+    public function createDep(){
+        $session = Yii::$app->session;
+        $this->organization_id = $session->get('organizationId');
+        return $this->save();
     }
 
 }

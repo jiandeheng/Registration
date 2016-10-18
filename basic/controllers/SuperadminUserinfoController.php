@@ -42,13 +42,13 @@ class SuperadminUserinfoController extends Controller
     public function actionIndex()
     {
         $searchModel = new UserSearch();
-        // $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        $dataProvider = new ActiveDataProvider([
-            'query' => User::find()->with('userDepartment', 'userOrganization'),
-            'pagination' => [
-                'pageSize' => 10,
-            ],
-        ]);
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        // $dataProvider = new ActiveDataProvider([
+        //     'query' => User::find()->with('userDepartment', 'userOrganization'),
+        //     'pagination' => [
+        //         'pageSize' => 10,
+        //     ],
+        // ]);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -83,7 +83,7 @@ class SuperadminUserinfoController extends Controller
             $department = $depModel->getDepartmentsList($key);
             break;
         }
-        $academy = ArrayHelper::map(Academy::find()->asArray()->all(), 'academy_id', 'academy_name');
+        $academy = ArrayHelper::map(Academy::find()->asArray()->all(), 'academy_name', 'academy_name');
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->user_id]);
@@ -161,7 +161,7 @@ class SuperadminUserinfoController extends Controller
         if(Yii::$app->user->isGuest){
             return $this->redirect(['superadmin-login/index']);
         }
-        return true;
+        return parent::beforeAction($action);
     }
 
 }

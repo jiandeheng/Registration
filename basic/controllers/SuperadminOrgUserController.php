@@ -149,7 +149,7 @@ class SuperadminOrgUserController extends Controller
         if(Yii::$app->user->isGuest){
             return $this->redirect(['superadmin-login/index']);
         }
-        return true;
+        return parent::beforeAction($action);
     }
     
 }

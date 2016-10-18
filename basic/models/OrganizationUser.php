@@ -33,7 +33,7 @@ class OrganizationUser extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['password'], 'required', 'message' => '密码不能为空'],
+            [['password'], 'required', 'message' => '密码不能为空' ],
             [['organization_user_username', 'organization_user_password'], 'required', 'message' => '账号密码不能为空'],
             [['organization_id'], 'required'],
             [['organization_id'], 'integer'],
@@ -74,4 +74,5 @@ class OrganizationUser extends \yii\db\ActiveRecord
         }
         return $this->update();
     }
+
 }

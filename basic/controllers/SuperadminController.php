@@ -8,7 +8,7 @@ use Yii;
 class SuperadminController extends Controller
 {
 	public function actionDashboard(){
-		$this->layout = 'superadminlayout';
+		$this->layout = 'superadmin-layout';
 		return $this->render('dashboard');
 	}
 
@@ -16,7 +16,7 @@ class SuperadminController extends Controller
 		if(Yii::$app->user->isGuest){
 			return $this->redirect(['superadmin-login/index']);
 		}
-		return true;
+		return parent::beforeAction($action);
 	}
 
 }
